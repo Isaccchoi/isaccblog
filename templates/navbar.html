@@ -1,0 +1,44 @@
+   {% load staticfiles %}
+
+   <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header" style="min-height:62px;">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" style="top:10px;">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand navbar-a-tag icon" href="{% url 'home' %}" style="font-size:25px; padding:0px; padding-top:3px;"><img class="img-reponsive" style="max-width:60px; max-height:59px;" src="http://isaccchoi.pythonanywhere.com/media/images/2017/03/17/realdew_CqBjvJb.jpg" /></a>
+        <a class="navbar-brand navbar-a-tag" href="{% url 'home' %}" style="font-size:30px; padding-top:30px;">Isacc Blog</a>
+          <!-- <a class="navbar-brand navbar-a-tag" href="{% url 'home' %}" style="font-size:22px;">리얼듀 커피</a><br/> -->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-a-tag-ul">
+              <!-- <li><a class="navbar-a-tag" style="padding-top: 33px;" href="{% url 'aboutus' %}">About us</a></li> -->
+              <!-- <li><a class="navbar-a-tag" style="padding-top: 33px;" href="{% url 'menu_list' %}">Menu</a></li>
+              <li><a class="navbar-a-tag" style="padding-top: 33px;" href="{% url 'location' %}">Location</a></li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle naver-a-tag" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 33px; background-color:black;" >Order<span class="caret"></span></a>
+                  <ul class="dropdown-menu" style="background-color:black;">
+                    <li><a style="background-color:black; color:gray; font-size:18px;" href="{% url 'reserve' bev='dutch' %}">더치 커피</a></li>
+                    <li><a style="background-color:black; color:gray; font-size:18px;" href="{% url 'reserve' bev='seogyo' %}">서교동 라떼</a></li>
+                    <li role="separator" style="background-color:gray;" class="divider"></li>
+                    <li><a style="background-color:black; color:gray; font-size:18px;" href="{% url 'identify' %}">주문내역 확인</a></li>
+                  </ul>
+              </li> -->
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+              <!-- fixme add icons for publishing to personal Social Networks -->
+              <!-- <li><a style="font-size:18px; padding-top:20px;">Share -></a></li> -->
+              <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://isaccchoi.pythonanywhere.com/"><i class="fa fa-facebook fa-2x" style="padding-top:15px;" aria-hidden="true"></i></a></li>
+              <li><a href="https://twitter.com/home?status=http://isaccchoi.pythonanywhere.com/"><i class="fa fa-twitter fa-2x" style="padding-top:15px;" aria-hidden="true"></i></a></li>
+          </ul>
+
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
