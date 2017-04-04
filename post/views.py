@@ -3,6 +3,7 @@ from django.shortcuts import reverse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
 
 
 # Create your views here.
@@ -38,6 +39,16 @@ class PostDetailView(DetailView):
     context_object_name = "post"
     model = Post
     template_name = "post/detail.html"
+
+    def get_object(self, *args, **kwargs):
+        post_id = self.kwargs.get("post_id")
+        return Post.objects.get(id=post_id)
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+    fields = ("category", "title", "content", "tags", "active", )
+    template_name = "post/update.html"
 
     def get_object(self, *args, **kwargs):
         post_id = self.kwargs.get("post_id")

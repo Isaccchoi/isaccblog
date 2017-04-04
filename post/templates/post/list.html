@@ -13,7 +13,9 @@
     {% for post in posts %}
         <div class="thumbnail">
             <div class="lead">
-                <h3>{{ post.title }}</h3>
+                <a href="{{ post.get_absolute_url }}">
+                    <h3>{{ post.title }}</h3>
+                </a>
                 <div>
                     {{ post.content }}
                     <p class="text-right">{{ post.user.get_username }}</p>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.conf import settings
 
 # Create your models here.
@@ -29,12 +30,14 @@ class Post(models.Model):
     # permissbile_range = models.CharField(max_length=120,
                             # choice=PERMISSIBLE_RANGE_CHOICE)
     # image
+    class Meta:
+        ordering = ["-updated_at",]
 
     def __str__(self):
         return self.title
 
-    class Meta:
-        ordering = ["-updated_at",]
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"post_id": self.pk})
 
 
 class Comment(models.Model):
