@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import reverse
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 
@@ -24,3 +25,9 @@ class PostCreateView(CreateView):
 
     def get_success_url(self, *args, **kwargs):
         return reverse("list")
+
+    def form_valid(self, form, *args, **kwargs):
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        obj.save()
+        return super(PostCreateView, self).form_valid(form, *args, **kwargs)
