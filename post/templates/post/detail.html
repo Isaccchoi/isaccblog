@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1 class="text-center">{{ post.title }}</h1>
+<br/>
+<div class="col-sm-10 col-sm-offset-1 text-center">
+
+        <p class="text-right">{{ post.user.get_username }}</p>
+        <br/>
+        {{ post.content }}
+        <br/>
+        <hr/>
+
+
+</div>
+{% endblock %}

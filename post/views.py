@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import reverse
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 
 
@@ -31,3 +32,13 @@ class PostCreateView(CreateView):
         obj.user = self.request.user
         obj.save()
         return super(PostCreateView, self).form_valid(form, *args, **kwargs)
+
+
+class PostDetailView(DetailView):
+    context_object_name = "post"
+    model = Post
+    template_name = "post/detail.html"
+
+    def get_object(self, *args, **kwargs):
+        post_id = self.kwargs.get("post_id")
+        return Post.objects.get(id=post_id)

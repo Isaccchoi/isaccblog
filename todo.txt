@@ -1,0 +1,12 @@
+detailpost view
+editpost view
+deletepost view
+add comment in detailview
+delete comment in detailview
+edit comment in detailview
+add tags(get_or_create in createview)
+add image field
+
+navbar jobs
+
+social login function(google, naver, facbook)
