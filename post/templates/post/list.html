@@ -12,14 +12,12 @@
 
     {% for post in posts %}
         <div class="thumbnail">
-            <div class="lead">
-                <a href="{{ post.get_absolute_url }}">
-                    <h3>{{ post.title }}</h3>
-                </a>
-                <div>
-                    {{ post.content }}
-                    <p class="text-right">{{ post.user.get_username }}</p>
-                </div>
+            <a href="{{ post.get_absolute_url }}">
+                <h3>{{ post.title|truncatechars:70 }}</h3>
+            </a>
+            <div>
+                {{ post.content|truncatechars:70 }}
+                <p class="text-right">{{ post.user.get_username }}</p>
             </div>
         </div>
     {% endfor %}

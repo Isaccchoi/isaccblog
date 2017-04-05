@@ -6,14 +6,15 @@ from .models import Category
 
 
 class PostForm(forms.ModelForm):
+    tags = forms.CharField(required=False,
+                            label="태그")
 
     class Meta:
         model = Post
-        fields = ("category", "title", "content", "tags", "active", )
+        fields = ("category", "title", "content", "active", )
         labels = {
             "category": _("카테고리"),
             "title": _("제목"),
             "content": _("내용"),
-            "tags": _("태그"),
             "active": _("배포"),
         }

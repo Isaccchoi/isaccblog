@@ -12,6 +12,7 @@ from django.views.generic.edit import DeleteView
 # Create your views here.
 
 from .models import Post
+from .models import Tag
 from .forms import PostForm
 
 class PostList(ListView):
@@ -33,9 +34,15 @@ class PostCreateView(CreateView):
         return reverse("list")
 
     def form_valid(self, form, *args, **kwargs):
-        obj = form.save(commit=False)
-        obj.user = self.request.user
-        obj.save()
+        post = form.save(commit=False)
+        post.user = self.request.user
+        post.save()
+        mass_tags = form.cleaned_data.get('tags', '')
+        tags = mass_tags.split(",")
+        for _tag in tags:
+            _tag = _tag.strip()
+            tag, _ = Tag.objects.get_or_create(name=_tag)
+            post.tags.add(tag)
         return super(PostCreateView, self).form_valid(form, *args, **kwargs)
 
 

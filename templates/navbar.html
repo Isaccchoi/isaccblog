@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
         </button>
         <!-- <a class="navbar-brand navbar-a-tag icon" href="#" style="font-size:25px; padding:0px; padding-top:3px;"><img class="img-reponsive" style="max-width:60px; max-height:59px;" src="http://isaccchoi.pythonanywhere.com/media/images/2017/03/17/realdew_CqBjvJb.jpg" /></a> -->
-        <!-- <a class="navbar-brand navbar-a-tag" href="#" style="font-size:30px; padding-top:30px;">Isacc Blog</a> -->
+        <a class="navbar-brand navbar-a-tag" href="{% url 'list' %}" style="font-size:30px; padding-top:20px;">Isacc Blog</a>
           <!-- <a class="navbar-brand navbar-a-tag" href="#" style="font-size:22px;">리얼듀 커피</a><br/> -->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -32,6 +32,11 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}" style="font-size:18px; padding-top:20px;">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}" style="font-size:18px; padding-top:20px;">Login</a></li>
+            {% endif %}
               <!-- fixme add icons for publishing to personal Social Networks -->
               <!-- <li><a style="font-size:18px; padding-top:20px;">Share -></a></li> -->
               <!-- <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://isaccchoi.pythonanywhere.com/"><i class="fa fa-facebook fa-2x" style="padding-top:15px;" aria-hidden="true"></i></a></li>
