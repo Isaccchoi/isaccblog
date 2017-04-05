@@ -5,6 +5,7 @@ from .views import PostList
 from .views import PostCreateView
 from .views import PostDetailView
 from .views import PostUpdateView
+from .views import PostDeleteView
 
 
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     url(r'^create/$', PostCreateView.as_view(), name="create"),
     url(r'^(?P<post_id>\d+)/$', PostDetailView.as_view(), name="detail"),
     url(r'^(?P<post_id>\d+)/update/$', PostUpdateView.as_view(), name="update"),
+    url(r'^(?P<post_id>\d+)/delete/$', PostDeleteView.as_view(), name="delete"),
 ]

@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import reverse
+from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 
 
 # Create your views here.
@@ -18,6 +21,7 @@ class PostList(ListView):
     def get_queryset(self):
         post = Post.objects.all().filter(active=True)
         return post
+
 
 
 class PostCreateView(CreateView):
@@ -35,6 +39,7 @@ class PostCreateView(CreateView):
         return super(PostCreateView, self).form_valid(form, *args, **kwargs)
 
 
+
 class PostDetailView(DetailView):
     context_object_name = "post"
     model = Post
@@ -45,6 +50,7 @@ class PostDetailView(DetailView):
         return Post.objects.get(id=post_id)
 
 
+
 class PostUpdateView(UpdateView):
     model = Post
     fields = ("category", "title", "content", "tags", "active", )
@@ -53,3 +59,20 @@ class PostUpdateView(UpdateView):
     def get_object(self, *args, **kwargs):
         post_id = self.kwargs.get("post_id")
         return Post.objects.get(id=post_id)
+
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = "post/delete.html"
+    context_object = "post"
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse("list")
+
+    def get_object(self, *args, **kwargs):
+        post_id = self.kwargs.get("post_id")
+        post = get_object_or_404(Post, id=post_id)
+        if post.user != self.request.user:
+            raise Http404
+        return post
