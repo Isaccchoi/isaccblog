@@ -9,6 +9,10 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import FormView
 
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
+
 
 # Create your views here.
 
@@ -18,13 +22,31 @@ from .models import Comment
 from .forms import PostForm
 from .forms import CommentForm
 
-class PostList(ListView):
+class PostListView(ListView):
     context_object_name = "posts"
     template_name = "post/list.html"
+    paginate_by = 5
 
     def get_queryset(self):
-        post = Post.objects.all().filter(active=True)
-        return post
+        posts = Post.objects.all().filter(active=True)
+        return posts
+
+    def get_context_data(self, **kwargs):
+        context = super(PostListView, self).get_context_data(**kwargs)
+        posts = Post.objects.all().filter(active=True)
+        paginator = Paginator(posts, self.paginate_by)
+
+        page = self.request.GET.get('page')
+
+        try:
+            post_exams = paginator.page(page)
+        except PageNotAnInteger:
+            post_exams = paginator.page(1)
+        except EmptyPage:
+            post_exams = paginator.page(paginator.num_pages)
+
+        context['posts'] = post_exams
+        return context
 
 
 
