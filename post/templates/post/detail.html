@@ -8,7 +8,13 @@
         <p class="lead" style="max-width:600px;">{{ post.title }}</p>
 
         <p>{{ post.content}}</p>
+        <p>
+        {% if post.image %}
+            <img class="img-responsive" style="margin:0 auto;" src="{{ post.image.url }}" />
+        {% endif %}
+        </p>
     </div>
+
     <div class="read text-center col-sm-2">
         <p class="text-right">작성자:{{ post.user.get_username }}</p>
         <br/>

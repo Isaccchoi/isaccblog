@@ -27,6 +27,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
     # permissbile_range = models.CharField(max_length=120,
                             # choice=PERMISSIBLE_RANGE_CHOICE)
     # image

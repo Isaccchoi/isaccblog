@@ -10,9 +10,9 @@ from .models import Tag
 
 
 class PostAdmin(admin.ModelAdmin):
-    field = ('category', 'title', 'content', 'tags', 'active')
+    field = ('category', 'title', 'content', 'tags', 'active', 'image')
     models = Post
-    list_display = ('category', 'title', 'active')
+    list_display = ('category', 'title', 'active', 'image')
 
 admin.site.register(Post, PostAdmin)
 
