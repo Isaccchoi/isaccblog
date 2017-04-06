@@ -4,17 +4,19 @@
 
 {% block content %}
 <div class="col-sm-10 col-sm-offset-1">
-    <div class="read text-center">
-        <span class="lead">{{ post.title }}</span>
+    <div class="read text-center col-sm-8 col-sm-offset-2">
+        <p class="lead" style="max-width:600px;">{{ post.title }}</p>
 
-        <p class="text-right">{{ post.user.get_username }}</p>
-        <br/>
         <p>{{ post.content}}</p>
+    </div>
+    <div class="read text-center col-sm-2">
+        <p class="text-right">작성자:{{ post.user.get_username }}</p>
+        <br/>
         <br/>
         {% if post_authenticate %}
-        <p class="text-right">
-            <a href="{{ post.get_delete_url }}"><input type="submit" class="btn btn-danger" value="삭제" /></a>
-        </P>
+            <p class="text-right">
+                <a href="{{ post.get_delete_url }}"><input type="submit" class="btn btn-danger" value="삭제" /></a>
+            </P>
         {% endif %}
     </div>
     <br/>
@@ -27,9 +29,9 @@
             </p>
         </form>
         <br/>
-        {% if comments %}
         <h4>댓글</h4>
         <hr/>
+        {% if comments %}
             {% for comment in comments %}
                 <p style="max-width:450px;">{{ comment.content }}</p>
                 <p class="text-right"><span style="margin-right:20px;">{{ comment.updated_at }}</span>{{ comment.user.get_username }}</p>
@@ -40,6 +42,9 @@
                 {% endif %}
                 <hr/>
             {% endfor %}
+
+        {% else %}
+            <h4 class="text-center">작성된 댓글이 없습니다.</h4>
         {% endif %}
     </div>
 </div>

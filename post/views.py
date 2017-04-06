@@ -34,7 +34,7 @@ class PostCreateView(CreateView):
 
 
     def get_success_url(self, *args, **kwargs):
-        return reverse("list")
+        return reverse("home")
 
     def form_valid(self, form, *args, **kwargs):
         post = form.save(commit=False)
@@ -106,7 +106,7 @@ class PostDeleteView(DeleteView):
     context_object = "post"
 
     def get_success_url(self, *args, **kwargs):
-        return reverse("list")
+        return reverse("home")
 
     def get_object(self, *args, **kwargs):
         post_id = self.kwargs.get("post_id")
