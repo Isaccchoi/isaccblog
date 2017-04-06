@@ -1,8 +1,9 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Post
 from .models import Category
+from .models import Post
+from .models import Comment
 
 
 class PostForm(forms.ModelForm):
@@ -17,4 +18,12 @@ class PostForm(forms.ModelForm):
             "title": _("제목"),
             "content": _("내용"),
             "active": _("배포"),
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("content",)
+        label = {
+            "content": _("댓글 작성")
         }

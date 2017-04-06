@@ -7,13 +7,16 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
+from django.views.generic.edit import FormView
 
 
 # Create your views here.
 
 from .models import Post
 from .models import Tag
+from .models import Comment
 from .forms import PostForm
+from .forms import CommentForm
 
 class PostList(ListView):
     context_object_name = "posts"
@@ -47,14 +50,38 @@ class PostCreateView(CreateView):
 
 
 
-class PostDetailView(DetailView):
-    context_object_name = "post"
+class PostDetailView(DetailView, FormView):
+    # context_object_name = "post"
+    form_class= CommentForm
     model = Post
     template_name = "post/detail.html"
 
     def get_object(self, *args, **kwargs):
         post_id = self.kwargs.get("post_id")
         return Post.objects.get(id=post_id)
+
+    def get_context_data(self, *args, **kwargs):
+        post = super(PostDetailView, self).get_context_data(*args, **kwargs)
+        specific_post = Post.objects.get(id=self.kwargs.get("post_id"))
+        comments = Comment.objects.filter(post=specific_post)
+        if comments:
+            post["comments"] = comments
+        return post
+
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            post = get_object_or_404(Post, id=self.kwargs.get("post_id"))
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = post
+            comment.save()
+        return FormView.post(self, request, *args, **kwargs)
+
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse("detail", kwargs={"post_id":self.kwargs.get("post_id")})
 
 
 
@@ -83,3 +110,17 @@ class PostDeleteView(DeleteView):
         if post.user != self.request.user:
             raise Http404
         return post
+
+
+# class CommentFormView(FormView):
+#     form = CommentForm
+#     template_name = "post/commentform.html"
+#
+#     def form_vailid(self, form, *args,**kwargs):
+#         comment = form.save(commit=False)
+#         comment.user = self.request.user
+#         comment.post = self.kwargs.get("post_id")
+#         comment.save()
+#
+#     def get_success_url(self, *args, **kwargs):
+#         return reverse("detail", post_id=self.kwargs.get("post_id"))
