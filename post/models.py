@@ -39,6 +39,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("detail", kwargs={"post_id": self.id})
 
+    def get_delete_url(self):
+        return reverse("delete", kwargs={"post_id":self.id})
+
 
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=False)

@@ -10,8 +10,13 @@
         <p class="text-right">{{ post.user.get_username }}</p>
         <br/>
         <p>{{ post.content}}</p>
+        <br/>
+        {% if post_authenticate %}
+        <p class="text-right">
+            <a href="{{ post.get_delete_url }}"><input type="submit" class="btn btn-danger" value="삭제" /></a>
+        </P>
+        {% endif %}
     </div>
-    <br/>
     <br/>
     <hr/>
     <div class="col-sm-10 col-sm-offset-1">
@@ -26,14 +31,14 @@
         <h4>댓글</h4>
         <hr/>
             {% for comment in comments %}
-                {% if user_authenticate %}
                 <p style="max-width:450px;">{{ comment.content }}</p>
                 <p class="text-right"><span style="margin-right:20px;">{{ comment.updated_at }}</span>{{ comment.user.get_username }}</p>
+                {% if comment_authenticate %}
                 <a href="{{ comment.get_delete_url }}">
                     <p class="text-right hot" sytle="font-size:15px;">삭제</p>
                 </a>
-                <hr/>
                 {% endif %}
+                <hr/>
             {% endfor %}
         {% endif %}
     </div>

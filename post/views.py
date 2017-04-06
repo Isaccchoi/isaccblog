@@ -67,7 +67,8 @@ class PostDetailView(DetailView, FormView):
         if comments:
             post["comments"] = comments
         if self.request.user.is_authenticated():
-            post["user_authenticate"] = True
+            post["comment_authenticate"] = True
+            post["post_authenticate"] = True
         # fixme - if user is this postowner or staff, can handle this
         return post
 
@@ -113,6 +114,7 @@ class PostDeleteView(DeleteView):
         if post.user != self.request.user:
             raise Http404
         return post
+
 
 
 class CommentDeleteView(DeleteView):
