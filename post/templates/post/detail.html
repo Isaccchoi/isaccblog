@@ -23,13 +23,18 @@
         </form>
         <br/>
         {% if comments %}
-            <table class="table">
-                {% for comment in comments %}
-                    <ul>{{ comment.content }}</ul>
-                    <ul class="text-right">{{ comment.user.get_username }}</ul>
-                    <hr/>
-                {% endfor %}
-            </table>
+        <h4>댓글</h4>
+        <hr/>
+            {% for comment in comments %}
+                {% if user_authenticate %}
+                <p style="max-width:450px;">{{ comment.content }}</p>
+                <p class="text-right"><span style="margin-right:20px;">{{ comment.updated_at }}</span>{{ comment.user.get_username }}</p>
+                <a href="{{ comment.get_delete_url }}">
+                    <p class="text-right hot" sytle="font-size:15px;">삭제</p>
+                </a>
+                <hr/>
+                {% endif %}
+            {% endfor %}
         {% endif %}
     </div>
 </div>

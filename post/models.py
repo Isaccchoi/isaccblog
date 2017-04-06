@@ -37,7 +37,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"post_id": self.pk})
+        return reverse("detail", kwargs={"post_id": self.id})
 
 
 class Comment(models.Model):
@@ -49,6 +49,12 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ["-updated_at",]
+
+    def __str__(self):
+        return self.content
+
+    def get_delete_url(self):
+        return reverse("delete_comment", kwargs={"comment_id": self.id})
 
 
 class Tag(models.Model):

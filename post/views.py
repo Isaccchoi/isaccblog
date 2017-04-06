@@ -66,6 +66,9 @@ class PostDetailView(DetailView, FormView):
         comments = Comment.objects.filter(post=specific_post)
         if comments:
             post["comments"] = comments
+        if self.request.user.is_authenticated():
+            post["user_authenticate"] = True
+        # fixme - if user is this postowner or staff, can handle this
         return post
 
     def post(self, request, *args, **kwargs):
@@ -112,15 +115,17 @@ class PostDeleteView(DeleteView):
         return post
 
 
-# class CommentFormView(FormView):
-#     form = CommentForm
-#     template_name = "post/commentform.html"
-#
-#     def form_vailid(self, form, *args,**kwargs):
-#         comment = form.save(commit=False)
-#         comment.user = self.request.user
-#         comment.post = self.kwargs.get("post_id")
-#         comment.save()
-#
-#     def get_success_url(self, *args, **kwargs):
-#         return reverse("detail", post_id=self.kwargs.get("post_id"))
+class CommentDeleteView(DeleteView):
+    model = Comment
+    template_name = "post/delete_comment.html"
+    context_object = "comment"
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse("detail", kwargs={"post_id":self.request.session["post_id"]})
+
+
+    def get_object(self, *args, **kwargs):
+        comment_id = self.kwargs.get("comment_id")
+        comment = get_object_or_404(Comment, id=comment_id)
+        self.request.session["post_id"] = comment.post.id
+        return comment
