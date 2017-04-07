@@ -1,4 +1,3 @@
 edit comment in detailview
-add image field
 navbar jobs
 social login function(google, naver, facbook)
