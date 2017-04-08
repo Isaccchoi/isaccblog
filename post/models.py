@@ -57,8 +57,14 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"post_id": self.post.id})
+
     def get_delete_url(self):
         return reverse("delete_comment", kwargs={"comment_id": self.id})
+
+    def get_update_url(self):
+        return reverse("update_comment", kwargs={"comment_id": self.id})
 
 
 class Tag(models.Model):

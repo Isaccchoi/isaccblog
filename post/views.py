@@ -122,6 +122,17 @@ class PostUpdateView(UpdateView):
 
 
 
+class CommentUpdateView(UpdateView):
+    model = Comment
+    fields = ("content", )
+    template_name = "post/update_comment.html"
+
+    def get_object(self, *args, **kwargs):
+        comment_id = self.kwargs.get("comment_id")
+        return Comment.objects.get(id=comment_id)
+
+
+
 class PostDeleteView(DeleteView):
     model = Post
     template_name = "post/delete.html"

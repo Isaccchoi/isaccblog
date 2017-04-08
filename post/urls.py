@@ -6,6 +6,7 @@ from .views import PostDetailView
 from .views import PostUpdateView
 from .views import PostDeleteView
 from .views import CommentDeleteView
+from .views import CommentUpdateView
 
 
 urlpatterns = [
@@ -14,5 +15,7 @@ urlpatterns = [
     url(r'^(?P<post_id>\d+)/update/$', PostUpdateView.as_view(), name="update"),
     url(r'^(?P<post_id>\d+)/delete/$', PostDeleteView.as_view(), name="delete"),
     url(r'^(?P<comment_id>\d+)/delete_comment/$', CommentDeleteView.as_view(),\
-                                                        name="delete_comment")
+                                                        name="delete_comment"),
+    url(r'^(?P<comment_id>\d+)/update_comment/$', CommentUpdateView.as_view(),\
+                                                        name="update_comment"),
 ]
