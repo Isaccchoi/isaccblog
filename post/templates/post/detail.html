@@ -21,8 +21,11 @@
             <br/>
             {% if post_authenticate %}
                 <p class="text-right">
+                    <a href="{{ post.get_update_url }}"><input type="submit" class="btn btn-info" value="수정" /></a>
+                </p>
+                <p class="text-right">
                     <a href="{{ post.get_delete_url }}"><input type="submit" class="btn btn-danger" value="삭제" /></a>
-                </P>
+                </p>
             {% endif %}
         </div>
         <br/>

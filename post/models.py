@@ -41,7 +41,10 @@ class Post(models.Model):
         return reverse("detail", kwargs={"post_id": self.id})
 
     def get_delete_url(self):
-        return reverse("delete", kwargs={"post_id":self.id})
+        return reverse("delete", kwargs={"post_id": self.id})
+
+    def get_update_url(self):
+        return reverse("update", kwargs={"post_id": self.id})
 
 
 class Comment(models.Model):

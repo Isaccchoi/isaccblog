@@ -1,3 +1,2 @@
-edit comment in detailview
 navbar jobs
 social login function(google, naver, facbook)
