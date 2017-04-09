@@ -15,6 +15,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 
+urlpatterns.append(
+    url(r'',include('social.apps.django_app.urls', namespace='social'))
+)
 
 
 if settings.DEBUG:
