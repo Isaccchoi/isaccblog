@@ -1,2 +1,5 @@
 navbar jobs
 social login function(google, naver, facbook)
+
+
+add profile after signed up

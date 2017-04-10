@@ -9,8 +9,14 @@
         <form method="POST" action=""> {% csrf_token %}
             {{ form | crispy }}
             <p class="text-right">
-                <input class="btn btn-lg btn-primary" type="submit" value="로그인" />
+                <input class="btn btn-lg btn-info" type="submit" value="로그인" />
             </p>
         </form>
+        <p class="text-center">
+            <a href="{% url "social:begin" "google-oauth2" %}"><button class="btn btn-danger" style="width: 40%;">Google 로그인</button></a>
+            <a href="{% url "social:begin" "facebook" %}"><button class="btn btn-primary" style="width: 40%;">FaceBook 로그인</button></a>
+        </p>
     </div>
+
+
 {% endblock %}

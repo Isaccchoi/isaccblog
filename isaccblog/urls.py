@@ -15,11 +15,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 
-urlpatterns.append(
-    url(r'',include('social.apps.django_app.urls', namespace='social'))
-)
-
-
 if settings.DEBUG:
 	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+urlpatterns.append(
+    url(r'',include('social.apps.django_app.urls', namespace='social'))
+)
